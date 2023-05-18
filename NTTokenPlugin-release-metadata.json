@@ -1,0 +1,5 @@
+{
+    "name": "NTTokenPlugin",
+    "description": "This Plugin is based on the TokenVotingPlugin of Aragon osx, the TokenVotingPluginSetup has been modified and a non-transferable Burnable GovernanceERC20 token has been created.",
+    "images": {}
+  }
