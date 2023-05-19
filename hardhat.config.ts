@@ -1,13 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-etherscan";
-
-import 'hardhat-gas-reporter';
-
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",

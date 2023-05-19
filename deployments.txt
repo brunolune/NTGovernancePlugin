@@ -1,4 +1,4 @@
-ens=nttokenvoting-test.dbrains.plugin.dao.eth
+ens=dbrains-nttokenvoting-test.plugin.dao.eth
 NTTokenPlugin-release-metadata_CID=bafkreie3gmm2mxvvi3xgzwyoqmyqe6ibsibeomd3tvcglzgu6avuyc2z5a
 NTTokenPlugin-build-metadata_CID=bafkreifuezhn5zumljlhae3cotugy4m6lgd4q5zj27ogq6kpbpth3ys5lu
 
