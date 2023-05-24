@@ -50,43 +50,52 @@ contract NTGovernanceERC20 is
     /// @param receivers The receivers of the tokens.
     /// @param amounts The amounts of tokens to be minted for each receiver.
     /// @dev The lengths of `receivers` and `amounts` must match.
-    /* struct MintSettings {
+    struct MintSettings {
         address[] receivers;
         uint256[] amounts;
-    } */
+    }
 
     /// @notice Thrown if the number of receivers and amounts specified in the mint settings do not match.
     /// @param receiversArrayLength The length of the `receivers` array.
     /// @param amountsArrayLength The length of the `amounts` array.
-    /* error MintSettingsArrayLengthMismatch(
+    error MintSettingsArrayLengthMismatch(
         uint256 receiversArrayLength,
         uint256 amountsArrayLength
-    ); */
+    );
 
     /// @notice Calls the initialize function.
     /// @param _dao The managing DAO.
     /// @param _name The name of the [ERC-20](https://eips.ethereum.org/EIPS/eip-20) governance token.
     /// @param _symbol The symbol of the [ERC-20](https://eips.ethereum.org/EIPS/eip-20) governance token.
-    constructor(IDAO _dao, string memory _name, string memory _symbol) {
-        initialize(_dao, _name, _symbol);
+    /// @param _mintSettings The token mint settings struct containing the `receivers` and `amounts`.
+
+    constructor(
+        IDAO _dao,
+        string memory _name,
+        string memory _symbol,
+        MintSettings memory _mintSettings
+    ) {
+        initialize(_dao, _name, _symbol, _mintSettings);
     }
 
     /// @notice Initializes the contract and mints tokens to a list of receivers.
     /// @param _dao The managing DAO.
     /// @param _name The name of the [ERC-20](https://eips.ethereum.org/EIPS/eip-20) governance token.
     /// @param _symbol The symbol of the [ERC-20](https://eips.ethereum.org/EIPS/eip-20) governance token.
+    /// @param _mintSettings The token mint settings struct containing the `receivers` and `amounts`.
     function initialize(
         IDAO _dao,
         string memory _name,
-        string memory _symbol
+        string memory _symbol,
+        MintSettings memory _mintSettings
     ) public initializer {
         // Check mint settings
-        /*  if (_mintSettings.receivers.length != _mintSettings.amounts.length) {
+        if (_mintSettings.receivers.length != _mintSettings.amounts.length) {
             revert MintSettingsArrayLengthMismatch({
                 receiversArrayLength: _mintSettings.receivers.length,
                 amountsArrayLength: _mintSettings.amounts.length
             });
-        } */
+        }
 
         __ERC20_init(_name, _symbol);
         __ERC20Permit_init(_name);
@@ -94,13 +103,13 @@ contract NTGovernanceERC20 is
         __ERC20Votes_init();
         __DaoAuthorizableUpgradeable_init(_dao);
 
-        /* for (uint256 i; i < _mintSettings.receivers.length; ) {
+        for (uint256 i; i < _mintSettings.receivers.length; ) {
             _mint(_mintSettings.receivers[i], _mintSettings.amounts[i]);
 
             unchecked {
                 ++i;
             }
-        } */
+        }
     }
 
     /// @notice Checks if this or the parent contract supports an interface by its ID.

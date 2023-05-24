@@ -57,7 +57,7 @@ contract NTTokenVotingSetup is PluginSetup {
 
     /// @notice Thrown if passed helpers array is of wrong length.
     /// @param length The array length of passed helpers.
-    //error WrongHelpersArrayLength(uint256 length);
+    error WrongHelpersArrayLength(uint256 length);
 
     /// @notice The contract constructor, that deploys the bases.
     constructor() {
@@ -65,8 +65,11 @@ contract NTTokenVotingSetup is PluginSetup {
             new NTGovernanceERC20(
                 IDAO(address(0)),
                 "",
-                ""
-                //NTGovernanceERC20.MintSettings(new address[](0), new uint256[](0))
+                "",
+                NTGovernanceERC20.MintSettings(
+                    new address[](0),
+                    new uint256[](0)
+                )
             )
         );
         /* governanceWrappedERC20Base = address(
@@ -87,10 +90,15 @@ contract NTTokenVotingSetup is PluginSetup {
         // and the required helpers
         (
             MajorityVotingBase.VotingSettings memory votingSettings,
-            TokenSettings memory tokenSettings // only used for NTGovernanceERC20(token is not passed)
+            TokenSettings memory tokenSettings, // only used for NTGovernanceERC20(token is not passed)
+            NTGovernanceERC20.MintSettings memory mintSettings
         ) = abi.decode(
                 _data,
-                (MajorityVotingBase.VotingSettings, TokenSettings)
+                (
+                    MajorityVotingBase.VotingSettings,
+                    TokenSettings,
+                    NTGovernanceERC20.MintSettings
+                )
             );
 
         //address token = tokenSettings.addr;
@@ -135,7 +143,8 @@ contract NTTokenVotingSetup is PluginSetup {
         NTGovernanceERC20(token).initialize(
             IDAO(_dao),
             tokenSettings.name,
-            tokenSettings.symbol
+            tokenSettings.symbol,
+            mintSettings
         );
         //}
 
@@ -210,10 +219,10 @@ contract NTTokenVotingSetup is PluginSetup {
         returns (PermissionLib.MultiTargetPermission[] memory permissions)
     {
         // Prepare permissions.
-        /* uint256 helperLength = _payload.currentHelpers.length;
+        uint256 helperLength = _payload.currentHelpers.length;
         if (helperLength != 1) {
             revert WrongHelpersArrayLength({length: helperLength});
-        } */
+        }
 
         // token can be either GovernanceERC20, GovernanceWrappedERC20, or IVotesUpgradeable, which
         // does not follow the GovernanceERC20 and GovernanceWrappedERC20 standard.

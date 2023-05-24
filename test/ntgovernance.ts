@@ -10,6 +10,11 @@ import {
 
 import { deployNewDAO } from '../utils/dao';
 
+export type MintSettings = {
+    receivers: string[];
+    amounts: number[];
+  };
+
 let signers: SignerWithAddress[];
 let dao: DAO;
 let token: NTGovernanceERC20;
@@ -27,11 +32,17 @@ describe("Non-Transferable Token", () => {
                 'NTGovernanceERC20',
                 signers[0]
             ) as NTGovernanceERC20__factory;
+
+            const mintSettings:MintSettings ={
+                receivers: [signers[0].address],
+                amounts: [1],
+              };
     
             token = await TokenFactory.deploy(
                 dao.address,
                 "Non-Transferable Token",
                 "NTT",
+                mintSettings,
             );
 
             await Promise.all([
@@ -53,7 +64,7 @@ describe("Non-Transferable Token", () => {
             await token.mint(signers[3].address,ethers.BigNumber.from(1000000000000000000n))
         })
         it("successfully mints tokens", async () => {
-            expect(await token.balanceOf(signers[0].address)).to.be.equal(ethers.BigNumber.from(1000000000000000000n))
+            expect(await token.balanceOf(signers[0].address)).to.be.equal(ethers.BigNumber.from(1000000000000000001n))
             expect(await token.balanceOf(signers[1].address)).to.be.equal(ethers.BigNumber.from(1000000000000000000n))
             expect(await token.balanceOf(signers[2].address)).to.be.equal(ethers.BigNumber.from(1000000000000000000n))
             expect(await token.balanceOf(signers[3].address)).to.be.equal(ethers.BigNumber.from(1000000000000000000n))
@@ -67,7 +78,7 @@ describe("Non-Transferable Token", () => {
             await expect(token.connect(signers[2]).transfer(signers[0].address, 100)).to.be.revertedWith("This token is non-transferable")
         })
         it("successfully returns the supply", async () => {
-            expect(await token.totalSupply()).to.be.equal(ethers.BigNumber.from(3600000000000000000n))
+            expect(await token.totalSupply()).to.be.equal(ethers.BigNumber.from(3600000000000000001n))
         })
     });
 
