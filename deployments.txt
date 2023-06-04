@@ -1,3 +1,33 @@
+/* (base) bruno@gram:~/Documents/Aragon/NTGovernancePlugin$ npx hardhat run --network polygon_mumbai  scripts/deploy_ntgovernance.ts
+Deploying contracts with the account: 0xE60930Dd528485BA57F4a17b02209877C2A9bFaC
+Account balance: 5632441488601043666
+NTTokenVotingSetup address: 0x54bcBcB8084fF92201B6fd473Ad6CEB763B62E07 */
+
+npx hardhat verify --contract 'contracts/NTTokenVotingSetup.sol:NTTokenVotingSetup' --network polygon_mumbai "0x54bcBcB8084fF92201B6fd473Ad6CEB763B62E07"
+--->
+Successfully submitted source code for contract
+contracts/NTTokenVotingSetup.sol:NTTokenVotingSetup at 0x54bcBcB8084fF92201B6fd473Ad6CEB763B62E07
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract NTTokenVotingSetup on Etherscan.
+https://mumbai.polygonscan.com/address/0x54bcBcB8084fF92201B6fd473Ad6CEB763B62E07#code 
+
+Verification completed with the following warnings.
+
+Warning 1: Failed to verify implementation contract at 0x81F678Df1D59a20c491B75112D4E6bE6240311B5: The address provided as argument contains a contract, but its bytecode doesn't match the contract contracts/NTTokenVotingSetup.sol:NTTokenVotingSetup.
+
+Possible causes are:
+  - Contract code changed after the deployment was executed. This includes code for seemingly unrelated contracts.
+  - A solidity file was added, moved, deleted or renamed after the deployment was executed. This includes files for seemingly unrelated contracts.
+  - Solidity compiler settings were modified after the deployment was executed (like the optimizer, target EVM, etc.).
+  - The given address is wrong.
+  - The selected network (polygon_mumbai) is wrong.
+
+
+plugin registered: https://mumbai.polygonscan.com/tx/0xd1a4cfb37371e4f1fcbadb84240c20eb5474cda068a554a1f25c28f0dd4ebc7a 
+
+**************************************************************************************************************
+
 ens=dbrains-nttokenvoting-test.plugin.dao.eth
 NTTokenPlugin-release-metadata_CID=bafkreie3gmm2mxvvi3xgzwyoqmyqe6ibsibeomd3tvcglzgu6avuyc2z5a
 NTTokenPlugin-build-metadata_CID=bafkreifuezhn5zumljlhae3cotugy4m6lgd4q5zj27ogq6kpbpth3ys5lu
