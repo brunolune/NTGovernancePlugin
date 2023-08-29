@@ -1,3 +1,8 @@
+second registration/deployement:
+tx = 0x6b6b40eef354fd6e6af043e2e5af8215c6c9c6f70b7515dbadc33e670f1041e1
+I think that the created tokenVoting plugin contract address is 0x74BebBdC74b454394A466444BC09Ab2A18666Df0
+
+*******************************************************************
 /* (base) bruno@gram:~/Documents/Aragon/NTGovernancePlugin$ npx hardhat run --network polygon_mumbai  scripts/deploy_ntgovernance.ts
 Deploying contracts with the account: 0xE60930Dd528485BA57F4a17b02209877C2A9bFaC
 Account balance: 5632441488601043666
