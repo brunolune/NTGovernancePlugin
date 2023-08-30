@@ -29,12 +29,13 @@ import {IVotesUpgradeable} from "@openzeppelin/contracts-upgradeable/governance/
 import {DaoAuthorizableUpgradeable} from "@aragon/osx/core/plugin/dao-authorizable/DaoAuthorizableUpgradeable.sol";
 import {IDAO} from "@aragon/osx/core/dao/IDAO.sol";
 
-//import {IERC20MintableUpgradeable} from "@aragon/osx/token/ERC20/IERC20MintableUpgradeable.sol";
+import {IERC20MintableUpgradeable} from "@aragon/osx/token/ERC20/IERC20MintableUpgradeable.sol";
 
 /// @title GovernanceERC20
 /// @author Aragon Association
 /// @notice An [OpenZeppelin `Votes`](https://docs.openzeppelin.com/contracts/4.x/api/governance#Votes) compatible [ERC-20](https://eips.ethereum.org/EIPS/eip-20) token that can be used for voting and is managed by a DAO.
 contract NTGovernanceERC20 is
+    IERC20MintableUpgradeable,
     Initializable,
     ERC165Upgradeable,
     ERC20Upgradeable,
@@ -115,7 +116,7 @@ contract NTGovernanceERC20 is
     /// @notice Checks if this or the parent contract supports an interface by its ID.
     /// @param _interfaceId The ID of the interface.
     /// @return Returns `true` if the interface is supported.
-    /* function supportsInterface(
+    function supportsInterface(
         bytes4 _interfaceId
     ) public view virtual override returns (bool) {
         return
@@ -125,7 +126,7 @@ contract NTGovernanceERC20 is
             _interfaceId == type(IVotesUpgradeable).interfaceId ||
             _interfaceId == type(IERC20MintableUpgradeable).interfaceId ||
             super.supportsInterface(_interfaceId);
-    } */
+    }
 
     /// @notice Mints tokens to an address.
     /// @param to The address receiving the tokens.
